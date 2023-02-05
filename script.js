@@ -32,6 +32,17 @@ var criarCardMoves = (id,nome)=>{
                 let move = data.moves[i];
             }*/
             html+=`<div id=${nome}>`
+
+            let height =`<p>
+            Altura: ${data.height*10} cm
+           </p>` 
+              html+=height;
+
+              let weight =`<p>
+            Peso: ${data.weight/10} kg
+           </p>` 
+              html+=weight;
+
             data.moves.forEach(move=>{
                 let auxiliar="";
                 for(let i=0;i<move.version_group_details.length;i++){
@@ -41,7 +52,7 @@ var criarCardMoves = (id,nome)=>{
                         if(version.move_learn_method.name=="level-up"){
                             auxiliar+=` Nível: ${version.level_learned_at}`
                         }
-                        auxiliar+="<p>"
+                        auxiliar+="</p>"
                         break;
                     }
                 }
@@ -50,8 +61,9 @@ var criarCardMoves = (id,nome)=>{
                     html+=auxiliar;
                 }
             })
+           
             html+=`</div>`
-            div.innerHTML=html;
+         div.innerHTML=html;
         } else {
             console.log('error')
         }
