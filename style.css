@@ -1,0 +1,41 @@
+#pokedex {
+
+}
+
+#backgroundDex {
+    position: absolute;
+    width: 23%;
+    height: auto;
+    margin-top: 12.5%;
+    margin-left: 23%;
+}
+
+#dex {
+    width: 60%;
+    height: auto;
+    position: absolute;
+    margin-left: 18%;
+}
+
+#rightButton {
+    width: 3%;
+    height: 3%;
+    background-color: transparent;
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    margin-left: 42.5%;
+    margin-top: 34.3%;
+    color: aliceblue;
+}
+
+#leftButton {
+    width: 3%;
+    height: auto;
+    background-color: transparent;
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    transform: translateX(-235%);
+    color: aliceblue;
+}
