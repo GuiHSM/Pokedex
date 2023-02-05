@@ -31,8 +31,6 @@ var criarCardMoves = (id,nome)=>{
             /*for(let i=0;i<data.moves;i++){
                 let move = data.moves[i];
             }*/
-            html+=`<div id=${nome}>`
-
             let height =`<p>
             Altura: ${data.height*10} cm
            </p>` 
@@ -41,29 +39,41 @@ var criarCardMoves = (id,nome)=>{
               let weight =`<p>
             Peso: ${data.weight/10} kg
            </p>` 
-              html+=weight;
+            html+=`<div id="${nome}" class="board">`
 
+              html+=weight;
+            let movimentos=[];
             data.moves.forEach(move=>{
-                let auxiliar="";
+                let metodo="";
+                let nivel=0;
                 for(let i=0;i<move.version_group_details.length;i++){
                     let version=move.version_group_details[i]
                     if(version.version_group.name=="firered-leafgreen"){
-                        auxiliar=`<p>Método: ${version.move_learn_method.name}`
+                        metodo=version.move_learn_method.name
                         if(version.move_learn_method.name=="level-up"){
-                            auxiliar+=` Nível: ${version.level_learned_at}`
+                            nivel=version.level_learned_at;
                         }
-                        auxiliar+="</p>"
                         break;
                     }
                 }
-                if(auxiliar!=""){
-                    html+=`<p>Nome: ${move.move.name}</p>`
-                    html+=auxiliar;
+                if(metodo!=""){
+                    movimentos.push({
+                        nome:move.move.name,
+                        nivel:nivel,
+                        metodo:metodo
+                    })
                 }
             })
-           
+            movimentos=movimentos.sort((mov1,mov2)=>{
+                return methodPriority(mov1)-methodPriority(mov2);
+            })
+            movimentos.forEach(movimento=>{
+                html+=`<div class="card"><p>Nome: ${movimento.nome}(${movimento.metodo})`
+                html+=movimento.nivel==0?"": ` Nível: ${movimento.nivel}`;
+                html+="</p></div>"
+            })
             html+=`</div>`
-         div.innerHTML=html;
+            div.innerHTML=html;
         } else {
             console.log('error')
         }
@@ -71,6 +81,17 @@ var criarCardMoves = (id,nome)=>{
     request.send()
 }
 
+var methodPriority= (movimento)=>{
+    if(movimento.metodo=="level-up"){
+        return 0+movimento.nivel;
+    }if(movimento.metodo=="machine"){
+        return 101;
+    }if(movimento.metodo=="tutor"){
+        return 102;
+    }
+    return 103;
+}
 
-criarCardMoves("teste","pikachu");
+
+criarCardMoves("teste","snorlax");
 
