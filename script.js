@@ -177,7 +177,7 @@ var changeToShiny=()=>{
     alterarPokemon(index);
 }
 
-var index=3;
+var index=1;
 
 alterarPokemon(index);
 
