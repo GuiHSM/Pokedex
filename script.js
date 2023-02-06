@@ -161,7 +161,7 @@ var nextPokemon=()=>{
     if(index>=152){
         index=1;
     }
-
+    alterarPokemon(index);
 }
 
 var previousPokmon=()=>{
@@ -169,6 +169,7 @@ var previousPokmon=()=>{
     if(index<=0){
         index=151;
     }
+    alterarPokemon(index);
 }
 
 var changeToShiny=()=>{
