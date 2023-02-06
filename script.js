@@ -1,3 +1,4 @@
+var shiny = false;
 
 var alterarSrcPokemon = (id, nome)=>{
     let request = new XMLHttpRequest()
@@ -91,7 +92,11 @@ var alterarPokemon = (index)=>{
         let data = JSON.parse(this.response)
 
         if (request.status >= 200 && request.status < 400) {
-            document.getElementById("sprite").src=data.sprites.front_default;
+            if(shiny){
+                document.getElementById("sprite").src=data.sprites.front_shiny;
+            }else{
+                document.getElementById("sprite").src=data.sprites.front_default;
+            }
             document.getElementById("altura").innerText=`Altura: ${data.height*10} cm` 
             document.getElementById("peso").innerText=`Peso: ${data.weight/10} kg` 
             //types
@@ -166,7 +171,12 @@ var previousPokmon=()=>{
     }
 }
 
-var index=1;
+var changeToShiny=()=>{
+    shiny=!shiny;
+    alterarPokemon(index);
+}
 
-alterarPokemon(3);
+var index=3;
+
+alterarPokemon(index);
 
