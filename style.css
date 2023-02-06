@@ -1,6 +1,6 @@
-#pokedex {
+@import url('https://fonts.cdnfonts.com/css/common-pixel');
 
-}
+#pokedex {}
 
 #backgroundDex {
     position: absolute;
@@ -26,7 +26,7 @@
     position: relative;
     margin-left: 42.5%;
     margin-top: 34.3%;
-    color: aliceblue;
+    color: #313131;
 }
 
 #leftButton {
@@ -37,5 +37,51 @@
     border: none;
     position: relative;
     transform: translateX(-235%);
-    color: aliceblue;
+    color: #313131;
+}
+
+#shinyButton {
+    width: 3%;
+    height: auto;
+    background-color: transparent;
+    border-radius: 5px;
+    background-size: 50%;
+    border: none;
+    position: relative;
+    transform: translate(-880%, -30%);
+    color: transparent;
+    font-size: 400%;
+}
+
+#pokemonTela {
+    position: relative;
+    width: 10%;
+    height: auto;
+    background-color: transparent;
+    border-radius: 3px;
+    border: none;
+    transform: translate(-230%, -145%);
+}
+
+#sprite {
+    width: 80%;
+    height: auto;
+}
+
+#alturaPeso {
+    position: relative;
+    display: inline-block;
+    font-family: 'Common Pixel', sans-serif;
+    font-size: 0.9vw; 
+    color: yellow                                         
+}
+
+#altura {
+    
+    transform: translate(-91%, 460%);
+}
+
+#peso {
+   transform: translate(50%, 270%);
+
 }

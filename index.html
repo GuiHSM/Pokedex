@@ -11,25 +11,32 @@
 </head>
 
 <body>
-    <div id="pokemon">
-        <div id="types"></div>
-        <img id="sprite">
-    </div>
-    <button type="button"  onclick="changeToShiny()">BOTÃO</button>
-    <p id="altura"></p>
-    <p id="peso"></p>
+
+
     <table id="movimentos">
 
     </table>
+
     <div id="pokedex">
         <img id="backgroundDex" src="images/pokemonLandscape.jpg" alt="backgroundDex">
         <img id="dex" src="images/pokedex.png" alt="pokedex">
-        <button type="button" id="rightButton" onclick="nextPokemon()">BOTÃO</button>
-        <button type="button" id="leftButton" onclick="previousPokmon()">BOTÃO</button>
 
+        <button type="button" id="rightButton" onclick="nextPokemon()">.</button>
+        <button type="button" id="leftButton" onclick="previousPokmon()">.</button>
+        <button type="button" id="shinyButton" onclick="changeToShiny()">.</button>
+        <button id="pokemonTela"><img id="sprite"></button>
+        <div id="alturaPeso">
+            <p id="altura"></p>
+            <p id="peso"></p>
+        </div>
 
+        <div id="pokemon">
+            <div id="types"></div>
+        </div>
+        
 
     </div>
+
 </body>
 
 </html>
