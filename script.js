@@ -97,7 +97,7 @@ var alterarPokemon = (index)=>{
             //types
             let types="";
             data.types.forEach(type=>{
-                types+=`<p class="${type.type.name}">${type.type.name}</p>`;
+                types+=`<p id="${type.type.name}">${type.type.name}</p>`;
             })
             document.getElementById("types").innerHTML=types 
             //moves
