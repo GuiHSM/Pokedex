@@ -78,11 +78,11 @@
 
 #altura {
 
-    transform: translate(-96.2%, 460%);
+    transform: translate(-93%, 460%);
 }
 
 #peso {
-    transform: translate(53%, 270%);
+    transform: translate(56%, 270%);
 
 }
 
@@ -94,7 +94,7 @@
     border-radius: 3px;
     border: none;
     color: transparent; 
-    transform: translate(-265%, -500%);
+    transform: translate(-263.3%, -500%);
    
 }
 

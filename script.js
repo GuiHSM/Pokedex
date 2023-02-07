@@ -102,9 +102,9 @@ var alterarPokemon = (index)=>{
             //types
             let types="";
             data.types.forEach(type=>{
-                types+=`<p id="${type.type.name}">${type.type.name}</p>`;
+                types+=` <img id="types" src="images/spriteTypes/${type.type.name}.png"> `;
             })
-            document.getElementById("types").innerHTML=types 
+            document.getElementById("typeTela").innerHTML=types 
             //moves
             let movimentos=[];
             data.moves.forEach(move=>{
