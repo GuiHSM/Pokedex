@@ -1,6 +1,15 @@
 var shiny = false;
 var index=3;
 var pokemons=[];
+var moves=[];
+var stats=[];
+var maxStats=250;
+var sprites=[];
+const tabelaEnum={
+    moves:0,
+    stats:1
+}
+var page=1;
 
 var findAllPokemons = ()=>{
     let request = new XMLHttpRequest()
@@ -35,11 +44,10 @@ var alterarPokemon = (index)=>{
         let data = JSON.parse(this.response)
 
         if (request.status >= 200 && request.status < 400) {
-            if(shiny){
-                document.getElementById("sprite").src=data.sprites.front_shiny;
-            }else{
-                document.getElementById("sprite").src=data.sprites.front_default;
-            }
+            sprites=[]
+            sprites.push(data.sprites.front_default);
+            sprites.push(data.sprites.front_shiny);
+            definirImagem();
             document.getElementById("altura").innerText=`Altura: ${data.height*10} cm` 
             document.getElementById("peso").innerText=`Peso: ${data.weight/10} kg`
             document.getElementById("name").innerText=`${data.name}`  
@@ -66,7 +74,7 @@ var alterarPokemon = (index)=>{
                 document.getElementById("typeTela").innerHTML+=` <img id="types" src="images/spriteTypes/${type}.png"> `
             })
             //moves
-            let movimentos=[];
+            moves=[];
             data.moves.forEach(move=>{
                 let metodo="";
                 let nivel=0;
@@ -81,29 +89,57 @@ var alterarPokemon = (index)=>{
                     }
                 }
                 if(metodo!=""){
-                    movimentos.push({
+                    moves.push({
                         nome:move.move.name,
                         nivel:nivel,
                         metodo:metodo
                     })
                 }
             })
-            movimentos=movimentos.sort((mov1,mov2)=>{
-                return methodPriority(mov1)-methodPriority(mov2);
+            //stats
+            stats=[]
+            data.stats.forEach(stat=>{
+                stats.push({
+                    nome:stat.stat.name,
+                    valor:stat.base_stat
+                })
             })
-            let html="";
-            movimentos.forEach(movimento=>{
-                html+=`<tr><td>${movimento.nome}</td>`
-                html+=movimento.nivel==0?`<td>${formatMethod(movimento.metodo)}</td>`: ` <td>${movimento.nivel}</td>`;
-                html+="</tr>"
-            })
-            document.getElementById("movimentos").innerHTML=html;
+            updateTable();
         } else {
             console.log('error')
         }
     }
     request.send()
 }
+
+var definirImagem=()=>{
+    document.getElementById("sprite").src=sprites[shiny+0];
+}
+
+var updateTable=()=>{
+    if(page){
+        moves=moves.sort((mov1,mov2)=>{
+            return methodPriority(mov1)-methodPriority(mov2);
+        })
+        let html="";
+        moves.forEach(movimento=>{
+            html+=`<tr><td>${movimento.nome}</td>`
+            html+=movimento.nivel==0?`<td>${formatMethod(movimento.metodo)}</td>`: ` <td>${movimento.nivel}</td>`;
+            html+="</tr>"
+        })
+        document.getElementById("tabela").innerHTML=html;
+    }else{
+        let html="<tr><th>Nome:</th><th>Valor:</th></tr>";
+        stats.forEach(stat=>{
+            html+=`<tr><td>${stat.nome}</td>`
+            html+=`<td class="direita"><progress value = ${stat.valor} max = ${maxStats}></progress>${stat.valor}</td>`
+            html+="</tr>"
+        })
+        document.getElementById("tabela").innerHTML=html;
+    }
+}
+
+
 
 var methodPriority= (movimento)=>{
     if(movimento.metodo=="level-up"){
@@ -134,7 +170,7 @@ var previousPokmon=()=>{
 
 var changeToShiny=()=>{
     shiny=!shiny;
-    alterarPokemon(index);
+    definirImagem();
 }
 
 var formatMethod=(method)=>{
@@ -161,6 +197,11 @@ var formatMethod=(method)=>{
     }
     return a.length-b.length;
 }*/
+
+var setPage=()=>{
+    page=(page+1)%2;
+    updateTable();
+}
 
 var searchByName = ()=>{
     let text = document.getElementById("teste").value.toLowerCase();
