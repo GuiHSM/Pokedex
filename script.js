@@ -43,11 +43,27 @@ var alterarPokemon = (index)=>{
             document.getElementById("altura").innerText=`Altura: ${data.height*10} cm` 
             document.getElementById("peso").innerText=`Peso: ${data.weight/10} kg` 
             //types
-            let types="";
+            let types=[];
             data.types.forEach(type=>{
-                types+=` <img id="types" src="images/spriteTypes/${type.type.name}.png"> `;
+                types.push(type.type.name);
             })
-            document.getElementById("typeTela").innerHTML=types 
+            if(types.length==1&&types[0]=="fairy"){
+                types[0]="normal";
+            }
+            if(types.length==2){
+                if(types[0]=="fairy"){
+                    let aux=types[0];
+                    types[0]=types[1];
+                    types[1]=aux;
+                }
+                if(types[1]=="fairy"){
+                    types.pop();
+                }
+            }
+            document.getElementById("typeTela").innerHTML="";
+            types.forEach((type)=>{
+                document.getElementById("typeTela").innerHTML+=` <img id="types" src="images/spriteTypes/${type}.png"> `
+            })
             //moves
             let movimentos=[];
             data.moves.forEach(move=>{
@@ -120,7 +136,6 @@ var changeToShiny=()=>{
     alterarPokemon(index);
 }
 
-<<<<<<< HEAD
 var formatMethod=(method)=>{
     if(method=="machine"){
         return "TM"
@@ -176,15 +191,11 @@ var searchByName = ()=>{
         if(pokemon.name.includes(text)){
             lista.push(pokemon.name)
             posicao.push(pokemon.name.search(text))
-            mini = 
         }
-    }
+    })
 
 }
 
-=======
-var index=1;
->>>>>>> main
 
 alterarPokemon(index);
 findAllPokemons();
