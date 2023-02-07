@@ -13,10 +13,6 @@
 <body>
 
 
-    <table id="movimentos">
-
-    </table>
-
     <div id="pokedex">
         <img id="backgroundDex" src="images/pokemonLandscape.jpg" alt="backgroundDex">
         <img id="dex" src="images/pokedex.png" alt="pokedex">
@@ -30,9 +26,18 @@
             <p id="altura"></p>
             <p id="peso"></p>
         </div>
+        
         <button id="typeTela" disabled><img id="types" src="images/spriteTypes/"></button>
-        <input id="teste" oninput="searchByName()">
+        <input id="teste" oninput="searchByName()" placeholder="SEARCH POKEMON">
+        <div id="pokemonName">
+            <p id="name"></p>
+        </div>
+        
+    <table id="movimentos">
+
+    </table>
     </div>
+   
 
 </body>
 

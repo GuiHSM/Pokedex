@@ -41,7 +41,8 @@ var alterarPokemon = (index)=>{
                 document.getElementById("sprite").src=data.sprites.front_default;
             }
             document.getElementById("altura").innerText=`Altura: ${data.height*10} cm` 
-            document.getElementById("peso").innerText=`Peso: ${data.weight/10} kg` 
+            document.getElementById("peso").innerText=`Peso: ${data.weight/10} kg`
+            document.getElementById("name").innerText=`${data.name}`  
             //types
             let types=[];
             data.types.forEach(type=>{
