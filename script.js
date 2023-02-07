@@ -1,87 +1,30 @@
 var shiny = false;
+var index=3;
+var pokemons=[];
 
-var alterarSrcPokemon = (id, nome)=>{
+var findAllPokemons = ()=>{
     let request = new XMLHttpRequest()
-
-    request.open('GET', 'https://pokeapi.co/api/v2/pokemon/'+nome, true)
-
+    request.open('GET', `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`, true)
     request.onload = function () {
-        let data = JSON.parse(this.response)
-
+        let data = JSON.parse(this.response);
+        let val=0;
         if (request.status >= 200 && request.status < 400) {
-            let imagem = document.getElementById(id);
-            imagem.src = data.sprites.front_default;
-        } else {
-            console.log('error')
+            data.results.forEach(pokemon=>{
+                val++;
+                pokemons.push({name:pokemon.name,id:val});
+            })
+        }else{
+            console.log("a")
         }
+        /*pokemons=pokemons.sort((a,b)=>{
+            res = comparePokemons(a,b);
+            console.log(a,b,pokemons);
+            return res;
+        })*/
     }
     request.send()
+    
 }
-
-/*
-var criarCardMoves = (id,index)=>{
-    let request = new XMLHttpRequest()
-
-    request.open('GET', `https://pokeapi.co/api/v2/pokemon/${index}`, true)
-
-    request.onload = function () {
-        let data = JSON.parse(this.response)
-
-        if (request.status >= 200 && request.status < 400) {
-            let div = document.getElementById(id);
-            let html = `<img src="${data.sprites.front_default}">`;
-            //for(let i=0;i<data.moves;i++){
-            //    let move = data.moves[i];
-            //}
-            let height =`<p>
-            Altura: ${data.height*10} cm
-           </p>` 
-              html+=height;
-
-              let weight =`<p>
-            Peso: ${data.weight/10} kg
-           </p>` 
-            html+=`<div id="${index}" class="board">`
-
-              html+=weight;
-            let movimentos=[];
-            data.moves.forEach(move=>{
-                let metodo="";
-                let nivel=0;
-                for(let i=0;i<move.version_group_details.length;i++){
-                    let version=move.version_group_details[i]
-                    if(version.version_group.name=="firered-leafgreen"){
-                        metodo=version.move_learn_method.name
-                        if(version.move_learn_method.name=="level-up"){
-                            nivel=version.level_learned_at;
-                        }
-                        break;
-                    }
-                }
-                if(metodo!=""){
-                    movimentos.push({
-                        nome:move.move.name,
-                        nivel:nivel,
-                        metodo:metodo
-                    })
-                }
-            })
-            movimentos=movimentos.sort((mov1,mov2)=>{
-                return methodPriority(mov1)-methodPriority(mov2);
-            })
-            movimentos.forEach(movimento=>{
-                html+=`<div class="card"><p>Nome: ${movimento.nome}(${movimento.metodo})`
-                html+=movimento.nivel==0?"": ` Nível: ${movimento.nivel}`;
-                html+="</p></div>"
-            })
-            html+=`</div>`
-            div.innerHTML=html;
-        } else {
-            console.log('error')
-        }
-    }
-    request.send()
-}*/
 
 var alterarPokemon = (index)=>{
     let request = new XMLHttpRequest()
@@ -133,8 +76,8 @@ var alterarPokemon = (index)=>{
             })
             let html="";
             movimentos.forEach(movimento=>{
-                html+=`<tr><td>${movimento.nome}(${movimento.metodo})</td>`
-                html+=movimento.nivel==0?"": ` <td>${movimento.nivel}</td>`;
+                html+=`<tr><td>${movimento.nome}</td>`
+                html+=movimento.nivel==0?`<td>${formatMethod(movimento.metodo)}</td>`: ` <td>${movimento.nivel}</td>`;
                 html+="</tr>"
             })
             document.getElementById("movimentos").innerHTML=html;
@@ -177,7 +120,69 @@ var changeToShiny=()=>{
     alterarPokemon(index);
 }
 
-var index=3;
+var formatMethod=(method)=>{
+    if(method=="machine"){
+        return "TM"
+    }
+    return method.charAt(0).toUpperCase() + method.slice(1);
+}
+
+/*var comparePokemons = (a,b)=>{
+    a=a.name;
+    b=b.name;
+    let id=0;
+    console.log(a,b);
+    while(id<Math.min(a.length,b.length)&&a[id]===b[id]){
+        id++;
+    }
+    if(id<Math.min(a.length,b.length)){
+        if(a[id]>b[id]){
+            return 1;
+        }else{
+            return -1;
+        }
+    }
+    return a.length-b.length;
+}*/
+
+var searchByName = ()=>{
+    let text = document.getElementById("teste").value.toLowerCase();
+    console.log(text)
+    let id=0;
+    let achado=0;
+    pokemons.forEach(pokemon=>{
+        if(pokemon.name.includes(text)){
+            if(pokemon.name===text){
+                index=pokemon.id;
+                alterarPokemon(index);
+                achado=-152;
+            }
+            id=pokemon.id;
+            achado++;
+        }
+    })
+    if(achado<0){
+        return;
+    }
+    if(achado==1){
+        index=id;
+        alterarPokemon(id);
+        document.getElementById("teste").value="";
+    }
+    let lista=[], posicao=[];
+    let mini=50;
+    pokemons.forEach(pokemon=>{
+        if(pokemon.name.includes(text)){
+            lista.push(pokemon.name)
+            posicao.push(pokemon.name.search(text))
+            mini = 
+        }
+    }
+
+}
+
 
 alterarPokemon(index);
-
+findAllPokemons();
+console.log('pokemons')
+console.log(pokemons)
