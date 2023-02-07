@@ -37,7 +37,7 @@
     border: none;
     position: relative;
     transform: translateX(-235%);
-    color: #313131;
+    color: transparent;
 }
 
 #shinyButton {
@@ -72,16 +72,35 @@
     position: relative;
     display: inline-block;
     font-family: 'Common Pixel', sans-serif;
-    font-size: 0.9vw; 
-    color: yellow                                         
+    font-size: 0.9vw;
+    color: yellow
 }
 
 #altura {
-    
-    transform: translate(-91%, 460%);
+
+    transform: translate(-93%, 460%);
 }
 
 #peso {
-   transform: translate(50%, 270%);
+    transform: translate(56%, 270%);
 
+}
+
+#typeTela {
+    position: relative;
+    width: 20%;
+    height: auto;
+    background-color: transparent;
+    border-radius: 3px;
+    border: none;
+    color: transparent; 
+    transform: translate(-263.3%, -500%);
+   
+}
+
+#types {
+
+    width: 20%;
+    height: auto;
+    
 }
