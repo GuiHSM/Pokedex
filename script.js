@@ -129,17 +129,35 @@ var updateTable=()=>{
         })
         document.getElementById("tabela").innerHTML=html;
     }else{
-        let html="<tr><th>Nome:</th><th>Valor:</th></tr>";
+        let html="<tr class='tabelaStats'><th>Nome:</th><th>Valor:</th></tr>";
         stats.forEach(stat=>{
-            html+=`<tr><td>${stat.nome}</td>`
-            html+=`<td class="direita"><progress value = ${stat.valor} max = ${maxStats}></progress>${stat.valor}</td>`
+            html+=`<tr class="tabelaStats"><td>${stat.nome}</td>`
+            html+=`<td class="direita"><progress style="accent-color:${getColor(stat.valor)}" value = ${stat.valor} max = ${maxStats}></progress>${stat.valor}</td>`
             html+="</tr>"
         })
         document.getElementById("tabela").innerHTML=html;
     }
 }
 
+var getColor= (statColor)=>{
 
+    let r = 0
+    let g = 0
+    let b = 0
+    
+    
+  g = (statColor - 5)*2.55 
+  g = Math.max(0,Math.min(g,255))  
+
+  r = - (statColor - 105)*5.1
+  r = Math.max(0,Math.min(r,255))  
+
+  b = (statColor - 155)*2.55 
+  b = Math.max(0,Math.min(b,255))
+  
+  return `rgb(${r},${g},${b});`
+
+}
 
 var methodPriority= (movimento)=>{
     if(movimento.metodo=="level-up"){

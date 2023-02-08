@@ -1,16 +1,13 @@
 @import url('https://fonts.cdnfonts.com/css/common-pixel');
 
-body{
-  background-color: aquamarine;  
+body {
+    background-color: #c6c6ff;
 }
+
 #pokedex {
     margin-top: 5%;
 }
 
-.direita{
-    width: 60%;
-    text-align: left;
-}
 
 #backgroundDex {
     position: absolute;
@@ -28,9 +25,9 @@ body{
 }
 
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 5px green;
-  border-radius: 10px;
-  color:green;
+    box-shadow: inset 0 0 5px green;
+    border-radius: 10px;
+    color: green;
 }
 
 #rightButton {
@@ -46,6 +43,7 @@ body{
 }
 
 #leftButton {
+
     width: 3%;
     height: auto;
     background-color: transparent;
@@ -78,8 +76,8 @@ body{
     border: none;
     margin-left: -23%;
     margin-top: 16.5%;
-    
-    
+
+
 }
 
 #sprite {
@@ -95,7 +93,7 @@ body{
     color: yellow;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     white-space: nowrap;
-    
+
 }
 
 #altura {
@@ -109,11 +107,11 @@ body{
     white-space: nowrap;
     margin-left: 14%;
     margin-top: 37%;
-    
+
 }
 
 #peso {
-  
+
     position: absolute;
     display: inline-block;
     font-family: 'Common Pixel', sans-serif;
@@ -133,13 +131,13 @@ body{
     background-color: transparent;
     border-radius: 3px;
     border: none;
-    margin-left: -27.3%; 
+    margin-left: -27.3%;
     margin-top: 13.5%;
-    
+
 }
 
 #types {
-    
+
     width: 80%;
     height: auto;
 
@@ -158,7 +156,7 @@ body{
 
 }
 
-#pokemonName{
+#pokemonName {
     position: absolute;
     display: inline-block;
     font-family: sans-serif;
@@ -170,14 +168,12 @@ body{
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
-#name {
-    
-}
+#name {}
 
-table {
+#tabela {
     position: absolute;
     width: 19.35%;
-    display:inline-block;
+    display: inline-block;
     margin-top: 12.2%;
     margin-left: 2.7%;
     position: absolute;
@@ -192,22 +188,39 @@ table {
     border-radius: 5px;
     box-shadow: -2px 2px#061312;
    
-    
+
 }
 
 thead {
     display: inline-block;
     width: 100%;
-    
+
 }
+
 tbody {
     height: 26.5em;
     display: inline-block;
     width: 100%;
     overflow-y: auto;
+
+}
+
+progress{
+
     
 }
 
+.tabelaStats {
+ 
+    
+}
+
+.direita {
+    width: 60%;
+    position: absolute;
+    padding-left: 1%;
+
+}
 
 #leftWhiteButton {
     position: absolute;
@@ -234,6 +247,7 @@ tbody {
 }
 
 #blueLight {
+    position: absolute;
     background-color: blue;
     width: 5%;
     height: auto;
