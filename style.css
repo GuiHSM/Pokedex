@@ -187,9 +187,6 @@ body {
     border-color: #061312;
     border-radius: 5px;
     box-shadow: -2px 2px#061312;
-
-
-
 }
 
 thead {
@@ -204,8 +201,6 @@ tbody {
     display: inline-block;
     width: 100%;
     overflow-y: auto;
-
-
 }
 
 progress {}
@@ -258,7 +253,7 @@ progress {}
 
 }
 
-#blueLight:hover {
+.blueLightBrilho {
     background-color: #fff;
     opacity: 45%;
     box-shadow:
@@ -295,7 +290,7 @@ progress {}
     margin-top: 0.9%;
 }
 
-#yellowLight:hover {
+.yellowLightBrilho{
     background-color: #fff;
     opacity: 45%;
     box-shadow:
@@ -310,7 +305,7 @@ progress {}
 
 }
 
-#greenLight:hover {
+.greenLightBrilho {
     background-color: #fff;
     opacity: 45%;
     box-shadow:

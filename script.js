@@ -184,6 +184,7 @@ var methodPriority = (movimento) => {
 }
 
 var nextPokemon = () => {
+    activeLight();
     index++;
     if (index >= 152) {
         index = 1;
@@ -192,15 +193,25 @@ var nextPokemon = () => {
 }
 
 var previousPokmon = () => {
+    activeLight();
     index--;
     if (index <= 0) {
         index = 151;
     }
     alterarPokemon(index);
 }
-
+var activeLight = () => {
+    document.getElementById("blueLight").className="blueLightBrilho";
+    setTimeout((()=>{document.getElementById("blueLight").className=""}), 100);
+}
 var changeToShiny = () => {
+    activeLight();
     shiny = !shiny;
+    if(shiny){
+        document.getElementById("yellowLight").className="smallLight yellowLightBrilho";
+    }else{
+        document.getElementById("yellowLight").className="smallLight";
+    }
     definirImagem();
 }
 
@@ -230,6 +241,7 @@ var formatMethod = (method) => {
 }*/
 
 var setPage = () => {
+    activeLight();
     page = (page + 1) % 2;
     updateTable();
 }
@@ -245,6 +257,8 @@ var searchByName = () => {
                 index = pokemon.id;
                 alterarPokemon(index);
                 achado = -152;
+                document.getElementById("greenLight").className="smallLight greenLightBrilho";
+                setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 100);
             }
             id = pokemon.id;
             achado++;
@@ -257,6 +271,8 @@ var searchByName = () => {
         index = id;
         alterarPokemon(id);
         document.getElementById("teste").value = "";
+        document.getElementById("greenLight").className="smallLight greenLightBrilho";
+        setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 100);
     }
     let lista = [], posicao = [];
     let mini = 50;
