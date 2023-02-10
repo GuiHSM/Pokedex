@@ -83,6 +83,7 @@ body {
 #sprite {
     width: 80%;
     height: auto;
+    
 }
 
 #alturaPeso {
@@ -284,7 +285,10 @@ progress {}
 #redLight:hover {
     background-color: #fff;
     opacity: 45%;
-   
+    box-shadow:
+    0 0 2vw 1vw #fff,
+    0 0 3.33vw 2vw #f0f,
+    0 0 4.67vw 3vw #ff0;
 }
 
 #yellowLight {
@@ -292,8 +296,26 @@ progress {}
     margin-top: 0.9%;
 }
 
+#yellowLight:hover {
+    background-color: #fff;
+    opacity: 45%;
+    box-shadow:
+    0 0 2vw 1vw #fff,
+    0 0 3.33vw 2vw orange,
+    0 0 4.67vw 3vw #ff0;
+}
+
 #greenLight {
     margin-left: -18.495%;
     margin-top: 0.9%;
 
+}
+
+#greenLight:hover {
+    background-color: #fff;
+    opacity: 45%;
+    box-shadow:
+    0 0 2vw 1vw #fff,
+    0 0 3.33vw 2vw greenyellow,
+    0 0 4.67vw 3vw #0ff;
 }
