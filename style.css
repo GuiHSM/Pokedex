@@ -75,7 +75,7 @@ body {
     border-radius: 3px;
     border: none;
     margin-left: -23%;
-    margin-top: 16.5%;
+    margin-top: 18.5%;
 
 
 }
@@ -242,7 +242,6 @@ progress {}
 #blueLight {
     position: absolute;
     display: inline-block;
-    background-color: transparent;
     width: 5vw;
     height: 5vw;
     margin-left: -29.2%;
@@ -311,5 +310,26 @@ progress {}
     box-shadow:
     0 0 2vw 1vw #fff,
     0 0 3.33vw 2vw greenyellow,
-    0 0 4.67vw 3vw #0ff;
+    0 0 4.67vw 3vw aquamarine;
 }
+
+#rightYellowLight {
+    position: absolute;
+    display: inline-block;
+    width: 2.2vw;
+    height: 2.2vw;
+    margin-left: 19.73%;
+    margin-top: 31.55%;
+    border-radius: 50%;
+
+}
+
+.rightYellowLightBrilho {
+    background-color: #fff;
+    opacity: 45%;
+    box-shadow:
+    0 0 2vw 1vw #fff,
+    0 0 3.33vw 2vw orange,
+    0 0 4.67vw 3vw #ff0;
+}
+

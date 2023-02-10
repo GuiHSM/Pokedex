@@ -185,6 +185,7 @@ var methodPriority = (movimento) => {
 
 var nextPokemon = () => {
     activeLight();
+    audioA.play();
     index++;
     if (index >= 152) {
         index = 1;
@@ -194,6 +195,7 @@ var nextPokemon = () => {
 
 var previousPokmon = () => {
     activeLight();
+    audioA.play();
     index--;
     if (index <= 0) {
         index = 151;
@@ -202,10 +204,17 @@ var previousPokmon = () => {
 }
 var activeLight = () => {
     document.getElementById("blueLight").className="blueLightBrilho";
-    setTimeout((()=>{document.getElementById("blueLight").className=""}), 100);
+    setTimeout((()=>{document.getElementById("blueLight").className=""}), 300);
 }
+
+var activeLightYellow = () => {
+    document.getElementById("rightYellowLight").className="rightYellowLightBrilho";
+    setTimeout((()=>{document.getElementById("rightYellowLight").className=""}), 300);
+}
+
 var changeToShiny = () => {
     activeLight();
+    audioShiny.play();
     shiny = !shiny;
     if(shiny){
         document.getElementById("yellowLight").className="smallLight yellowLightBrilho";
@@ -241,7 +250,8 @@ var formatMethod = (method) => {
 }*/
 
 var setPage = () => {
-    activeLight();
+    activeLightYellow();
+    audioA.play();
     page = (page + 1) % 2;
     updateTable();
 }
@@ -258,7 +268,7 @@ var searchByName = () => {
                 alterarPokemon(index);
                 achado = -152;
                 document.getElementById("greenLight").className="smallLight greenLightBrilho";
-                setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 100);
+                setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
             }
             id = pokemon.id;
             achado++;
@@ -272,7 +282,7 @@ var searchByName = () => {
         alterarPokemon(id);
         document.getElementById("teste").value = "";
         document.getElementById("greenLight").className="smallLight greenLightBrilho";
-        setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 100);
+        setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
     }
     let lista = [], posicao = [];
     let mini = 50;
@@ -285,6 +295,13 @@ var searchByName = () => {
 
 }
 
+// sound effects 
+
+const audioA = new Audio ("soundFX/pokemonButtonASound.mp3")
+audioA.volume = 0.3
+
+const audioShiny = new Audio ("soundFX/pokemonShinySound.mp3")
+audioShiny.volume = 0.3
 
 alterarPokemon(index);
 findAllPokemons();
