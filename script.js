@@ -4,6 +4,8 @@ var pokemons = [];
 var moves = [];
 var stats = [];
 var maxStats = 250;
+var porcentagemTelaPokemon=0.08;//0.08%
+var img= new Image();
 var sprites = ['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/'];
 const tabelaEnum = {
@@ -111,9 +113,20 @@ var alterarPokemon = (index) => {
     request.send()
 }
 
+var reajustarImagem = ()=>{
+    document.getElementById("sprite").style.width=`${Math.floor(img.naturalWidth*window.innerWidth*porcentagemTelaPokemon/100)}px`;
+}
+  
+window.onresize = reajustarImagem;
+
 var definirImagem = () => {
-    document.getElementById("sprite").style.width=null;
+    img = new Image();
+    img.onload = function() {
+        reajustarImagem();
+    }
+    img.src = sprites[shiny + 0] + `${index}.gif`;
     document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
+    //
 }
 
 var updateTable = () => {
