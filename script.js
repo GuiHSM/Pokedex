@@ -112,6 +112,7 @@ var alterarPokemon = (index) => {
 }
 
 var definirImagem = () => {
+    document.getElementById("sprite").style.width=null;
     document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
 }
 
