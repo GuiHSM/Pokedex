@@ -23,7 +23,7 @@ var findAllPokemons = () => {
         if (request.status >= 200 && request.status < 400) {
             data.results.forEach(pokemon => {
                 val++;
-                pokemons.push({ name: pokemon.name, id: val });
+                pokemons.push({ name: stringToShow(pokemon.name), id: val });
             })
         } else {
             console.log("a")
@@ -51,7 +51,7 @@ var alterarPokemon = (index) => {
             definirImagem();
             document.getElementById("altura").innerText = `Altura: ${data.height * 10} cm`
             document.getElementById("peso").innerText = `Peso: ${data.weight / 10} kg`
-            document.getElementById("name").innerText = `${data.name}`
+            document.getElementById("name").innerText = `${stringToShow(data.name)}`
             //types
             let types = [];
             data.types.forEach(type => {
@@ -111,6 +111,15 @@ var alterarPokemon = (index) => {
         }
     }
     request.send()
+}
+
+var getCry=(pokeName)=>{
+    audioP.pause();
+    audioP.currentTime=0;
+    audioP = new Audio (`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
+    console.log(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
+    audioP.volume = 0.3
+    audioP.play();
 }
 
 var reajustarImagem = ()=>{
@@ -185,22 +194,24 @@ var methodPriority = (movimento) => {
 
 var nextPokemon = () => {
     activeLight();
-    audioA.play();
+    playAudio(audioA);
     index++;
     if (index >= 152) {
         index = 1;
     }
     alterarPokemon(index);
+    getCry(pokemons[index-1].name);
 }
 
 var previousPokmon = () => {
     activeLight();
-    audioA.play();
+    playAudio(audioA);
     index--;
     if (index <= 0) {
         index = 151;
     }
     alterarPokemon(index);
+    getCry(pokemons[index-1].name);
 }
 var activeLight = () => {
     document.getElementById("blueLight").className="blueLightBrilho";
@@ -214,7 +225,7 @@ var activeLightYellow = () => {
 
 var changeToShiny = () => {
     activeLight();
-    audioShiny.play();
+    playAudio(audioShiny);
     shiny = !shiny;
     if(shiny){
         document.getElementById("yellowLight").className="smallLight yellowLightBrilho";
@@ -229,6 +240,12 @@ var formatMethod = (method) => {
         return "TM"
     }
     return method.charAt(0).toUpperCase() + method.slice(1);
+}
+
+var playAudio=(audio)=>{
+    audio.pause();
+    audio.currentTime=0;
+    audio.play();
 }
 
 /*var comparePokemons = (a,b)=>{
@@ -251,7 +268,7 @@ var formatMethod = (method) => {
 
 var setPage = () => {
     activeLightYellow();
-    audioA.play();
+    playAudio(audioA);
     page = (page + 1) % 2;
     updateTable();
 }
@@ -269,6 +286,7 @@ var searchByName = () => {
                 achado = -152;
                 document.getElementById("greenLight").className="smallLight greenLightBrilho";
                 setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
+                getCry(pokemons[index-1].name);
             }
             id = pokemon.id;
             achado++;
@@ -283,6 +301,7 @@ var searchByName = () => {
         document.getElementById("teste").value = "";
         document.getElementById("greenLight").className="smallLight greenLightBrilho";
         setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
+        getCry(pokemons[index-1].name);
     }
     let lista = [], posicao = [];
     let mini = 50;
@@ -295,6 +314,9 @@ var searchByName = () => {
 
 }
 
+var stringToShow=(texto)=>{
+    return texto.replace("-"," ");
+}
 // sound effects 
 
 const audioA = new Audio ("soundFX/pokemonButtonASound.mp3")
@@ -302,6 +324,8 @@ audioA.volume = 0.3
 
 const audioShiny = new Audio ("soundFX/pokemonShinySound.mp3")
 audioShiny.volume = 0.3
+
+var audioP = new Audio ("soundFX/pokemonShinySound.mp3");
 
 alterarPokemon(index);
 findAllPokemons();
