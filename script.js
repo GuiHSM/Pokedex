@@ -1,11 +1,12 @@
 var shiny = false;
-var index = 3;
+var index = 1;
 var pokemons = [];
 var moves = [];
 var stats = [];
 var maxStats = 250;
 var porcentagemTelaPokemon=0.08;//0.08%
 var img= new Image();
+var nPokemon = 649;
 var sprites = ['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/'];
 const tabelaEnum = {
@@ -16,7 +17,7 @@ var page = 1;
 
 var findAllPokemons = () => {
     let request = new XMLHttpRequest()
-    request.open('GET', `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`, true)
+    request.open('GET', `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${nPokemon}`, true)
     request.onload = function () {
         let data = JSON.parse(this.response);
         let val = 0;
@@ -81,7 +82,7 @@ var alterarPokemon = (index) => {
                 let nivel = 0;
                 for (let i = 0; i < move.version_group_details.length; i++) {
                     let version = move.version_group_details[i]
-                    if (version.version_group.name == "firered-leafgreen") {
+                    if (version.version_group.name == "black-white") {
                         metodo = version.move_learn_method.name
                         if (version.move_learn_method.name == "level-up") {
                             nivel = version.level_learned_at;
@@ -117,25 +118,44 @@ var getCry=(pokeName)=>{
     audioP.pause();
     audioP.currentTime=0;
     audioP = new Audio (`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
-    console.log(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
-    audioP.volume = sound
+    
+    audioP.volume = sound/2
     audioP.play();
 }
 
 var reajustarImagem = ()=>{
     document.getElementById("sprite").style.width=`${Math.floor(img.naturalWidth*window.innerWidth*porcentagemTelaPokemon/100)}px`;
+
+     if (img.naturalHeight>100){
+        document.getElementById("pokemonTela").style.marginTop = "14%"
+     }else
+
+     if (img.naturalHeight>79){
+        
+        document.getElementById("pokemonTela").style.marginTop = "15.5%"
+        
+     }else{
+
+        document.getElementById("pokemonTela").style.marginTop = "18%"
+
+     } 
+
 }
   
 window.onresize = reajustarImagem;
 
 var definirImagem = () => {
+    
     img = new Image();
     img.onload = function() {
         reajustarImagem();
     }
     img.src = sprites[shiny + 0] + `${index}.gif`;
+    
     document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
-    //
+     
+     
+
 }
 
 var updateTable = () => {
@@ -196,7 +216,7 @@ var nextPokemon = () => {
     activeLight();
     playAudio(audioA);
     index++;
-    if (index >= 152) {
+    if (index >= nPokemon+1) {
         index = 1;
     }
     alterarPokemon(index);
@@ -208,7 +228,7 @@ var previousPokmon = () => {
     playAudio(audioA);
     index--;
     if (index <= 0) {
-        index = 151;
+        index = nPokemon;
     }
     alterarPokemon(index);
     getCry(pokemons[index-1].name);
@@ -275,7 +295,7 @@ var setPage = () => {
 
 var searchByName = () => {
     let text = document.getElementById("teste").value.toLowerCase();
-    console.log(text)
+    
     let id = 0;
     let achado = 0;
     pokemons.forEach(pokemon => {
@@ -283,7 +303,7 @@ var searchByName = () => {
             if (pokemon.name === text) {
                 index = pokemon.id;
                 alterarPokemon(index);
-                achado = -152;
+                achado = -nPokemon-1;
                 document.getElementById("greenLight").className="smallLight greenLightBrilho";
                 setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
                 getCry(pokemons[index-1].name);
@@ -327,6 +347,10 @@ var mute=()=>{
     audioA.volume = sound
     audioShiny.volume = sound
 }
+
+
+var pokemonDiferentes = [6, 17, 22, 40, 42, 49, 73, 142, 146]
+
 // sound effects 
 var sound = 0.3;
 
@@ -340,5 +364,3 @@ var audioP = new Audio ("soundFX/pokemonShinySound.mp3");
 
 alterarPokemon(index);
 findAllPokemons();
-console.log('pokemons')
-console.log(pokemons)

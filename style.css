@@ -40,8 +40,7 @@ body {
     border-radius: 3px;
     border: none;
     margin-left: 28.5%;
-    margin-top: 18%;
-
+    
 
 }
 
@@ -128,7 +127,7 @@ body {
     font-size: 0.9vw;
     text-transform: capitalize;
     margin-top: 14%;
-    margin-left: -20%;
+    margin-left: 31.75%;
     color: aliceblue;
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
@@ -332,6 +331,7 @@ progress {}
     border-top: transparent;
     border-right: transparent;
     color: transparent;
+    border-color: white;
     background-color: transparent;
     
 }
@@ -346,6 +346,7 @@ progress {}
     height: 2.55vw;
     border-top: transparent;
     border-left: transparent;
+    border-color: white;
     color: transparent;
     background-color: transparent;
 }
@@ -355,6 +356,7 @@ progress {}
     display: inline-block;
     color: transparent;
     background-color: transparent;
+    border-color: white;
     width: 2.2vw;
     height: 2.2vw;
     margin-top: 26.6%;
