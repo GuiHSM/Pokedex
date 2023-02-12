@@ -118,7 +118,7 @@ var getCry=(pokeName)=>{
     audioP.currentTime=0;
     audioP = new Audio (`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
     console.log(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
-    audioP.volume = 0.3
+    audioP.volume = sound
     audioP.play();
 }
 
@@ -317,13 +317,24 @@ var searchByName = () => {
 var stringToShow=(texto)=>{
     return texto.replace("-"," ");
 }
+
+var mute=()=>{
+    if(sound>0){
+        sound=0;
+    }else{
+        sound=0.3;
+    }
+    audioA.volume = sound
+    audioShiny.volume = sound
+}
 // sound effects 
+var sound = 0.3;
 
 const audioA = new Audio ("soundFX/pokemonButtonASound.mp3")
-audioA.volume = 0.3
+audioA.volume = sound
 
 const audioShiny = new Audio ("soundFX/pokemonShinySound.mp3")
-audioShiny.volume = 0.3
+audioShiny.volume = sound
 
 var audioP = new Audio ("soundFX/pokemonShinySound.mp3");
 
