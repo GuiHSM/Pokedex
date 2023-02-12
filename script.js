@@ -15,6 +15,44 @@ const tabelaEnum = {
 }
 var page = 1;
 
+var matrizAdjacencia = 
+[[0,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
+[1,0,1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,1,1],
+[1,-1,0,-1,1,-1,-1,0,-1,1,-1,-1,-1,-1,-1,1,1],
+[1,1,1,0,1,-1,1,1,1,1,1,1,1,-1,1,1,1],
+[0,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
+[1,-1,1,1,1,0,1,1,1,1,1,-1,1,-1,1,1,-1],
+[1,-1,1,-1,1,-1,0,-1,-1,1,1,-1,-1,-1,-1,0,0],
+[1,-1,0,-1,1,-1,1,0,-1,1,-1,-1,-1,-1,1,1,0],
+[1,-1,1,-1,1,-1,1,1,0,1,-1,-1,-1,-1,1,1,1],
+[-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1],
+[1,-1,1,-1,1,-1,-1,1,1,1,0,-1,-1,-1,0,1,0],
+[1,1,1,-1,1,1,1,1,1,1,1,0,1,-1,1,1,1],
+[1,1,1,-1,1,-1,1,1,1,1,1,-1,0,-1,-1,1,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1],
+[1,1,1,-1,1,-1,1,-1,-1,1,0,-1,1,-1,0,0,1],
+[1,-1,-1,-1,1,-1,0,-1,-1,1,-1,-1,-1,-1,0,0,-1],
+[1,-1,-1,-1,1,1,0,0,-1,1,0,-1,-1,-1,-1,1,0]]
+
+var mapaType = new Map();
+mapaType.set("normal",0);
+mapaType.set("fire",1);
+mapaType.set("fighting",2);
+mapaType.set("water",3);
+mapaType.set("flying",4);
+mapaType.set("grass",5);
+mapaType.set("poison",6);
+mapaType.set("electric",7);
+mapaType.set("ground",8);
+mapaType.set("psychic",9);
+mapaType.set("rock",10);
+mapaType.set("ice",11);
+mapaType.set("bug",12);
+mapaType.set("dragon",13);
+mapaType.set("ghost",14);
+mapaType.set("dark",15);
+mapaType.set("steel",16);
+
 var findAllPokemons = () => {
     let request = new XMLHttpRequest()
     request.open('GET', `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${nPokemon}`, true)
@@ -364,3 +402,10 @@ var audioP = new Audio ("soundFX/pokemonShinySound.mp3");
 
 alterarPokemon(index);
 findAllPokemons();
+
+var getType=(primario,secundario)=>{
+    if(matrizAdjacencia[mapaType.get(primario)][mapaType.get(secundario)]<0){
+        return secundario;
+    }
+    return primario;
+}
