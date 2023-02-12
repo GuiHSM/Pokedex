@@ -16,10 +16,6 @@
     <div id="pokedex">
         <img id="backgroundDex" src="images/pokemonLandscape.jpg" alt="backgroundDex">
         <img id="dex" src="images/pokedex.png" alt="pokedex">
-
-        <button type="button" id="rightButton" onclick="nextPokemon()">.</button>
-        <button type="button" id="leftButton" onclick="previousPokmon()">.</button>
-        <button type="button" id="shinyButton" onclick="changeToShiny()">.</button>
         <button id="pokemonTela" disabled><img id="sprite"></button>
         <button id="typeTela" disabled><img id="types" src="images/spriteTypes/"></button>
         <span id="blueLight"> </span>
@@ -37,14 +33,17 @@
         <div id="pokemonName">
             <p id="name"></p>
         </div>
-
+      
         
-   
+        <button type="button" id="rightButton" onclick="nextPokemon()">.</button>
+        <button type="button" id="leftButton" onclick="previousPokmon()">.</button>
+        <button type="button" id="shinyButton" onclick="changeToShiny()">.</button>
+        <button type="button" id="muteButton" onclick="">BOTAO</button>
     </div>
 
     <button type="button" id="leftWhiteButton" onclick="setPage()">BOTAO</button>
     <button type="button" id="rightWhiteButton" onclick="setPage()">BOTAO</button>
-    <!-- <button type="button" id="muteButton" onclick="">.</button> -->
+    
 
     <!-- Otários [charizard, pidgeotto, fearow, wigglytuff, golbat, venomoth, tentacruel, aerodactyl, moltres]   
     
