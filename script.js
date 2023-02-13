@@ -3,7 +3,7 @@ var index = 1;
 var pokemons = [];
 var moves = [];
 var stats = [];
-var maxStats = 250;
+var maxStats = 255;
 var porcentagemTelaPokemon=0.08;//0.08%
 var imgPokemon= new Image();
 var nPokemon = 649;
@@ -15,7 +15,6 @@ const tabelaEnum = {
 }
 var page = 1;
 
-
 var ahRetirar=["land","normal","plant","default","standard","altered"]
 var matrizAdjacencia = 
 [[0,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
@@ -24,9 +23,9 @@ var matrizAdjacencia =
 [1,1,1,0,1,-1,1,1,1,1,1,1,1,-1,1,1,1],
 [0,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
 [1,-1,1,1,1,0,1,1,1,1,1,-1,1,-1,1,1,-1],
-[1,-1,1,-1,1,-1,0,-1,-1,1,1,-1,-1,-1,-1,0,0],
+[1,-1,1,-1,1,-1,0,-1,1,1,1,-1,-1,-1,-1,0,0],
 [1,-1,0,-1,1,-1,1,0,-1,1,-1,-1,-1,-1,1,1,0],
-[1,-1,1,-1,1,-1,1,1,0,1,-1,-1,-1,-1,1,1,1],
+[1,-1,1,-1,1,-1,-1,1,0,1,-1,-1,-1,-1,1,1,1],
 [-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1],
 [1,-1,1,-1,1,-1,-1,1,1,1,0,-1,-1,-1,0,1,0],
 [1,1,1,-1,1,1,1,1,1,1,1,0,1,-1,1,1,1],
@@ -65,10 +64,14 @@ var sameType={"electric":"steel",
 
 var isExtraordinary=()=>{
     let request = new XMLHttpRequest()
-    request.open('GET', `https://pokeapi.co/api/v2/pokemon-species/${index}`, true)
+    var eh = false;
+    request.open('GET', `https://pokeapi.co/api/v2/pokemon-species/${index}`, false)
     request.onload = function () {
         let species = JSON.parse(this.response);
+        eh = species.is_legendary||species.is_mythical;
     }
+    request.send();
+    return eh;
 }
 
 var findAllPokemons = () => {
@@ -104,9 +107,13 @@ var alterarPokemon = (index) => {
         let data = JSON.parse(this.response)
 
         if (request.status >= 200 && request.status < 400) {
-            
+            console.log(isExtraordinary());
             definirImagem();
-            document.getElementById("altura").innerText = `Altura: ${data.height * 10} cm`
+            if(data.height>100){
+                document.getElementById("altura").innerText = `Altura: ${data.height/10} m`
+            }else{
+                document.getElementById("altura").innerText = `Altura: ${data.height * 10} cm`
+            }
             document.getElementById("peso").innerText = `Peso: ${data.weight / 10} kg`
             document.getElementById("name").innerText = `${stringToShow(data.name)}`
             //types
@@ -427,7 +434,6 @@ var getType=(primario,secundario)=>{
         
         valorRetornavel=secundario;
     }
-    console.log(sameType[valorRetornavel])
     if(sameType[valorRetornavel]){
         return sameType[valorRetornavel];
     }
