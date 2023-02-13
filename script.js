@@ -5,7 +5,7 @@ var moves = [];
 var stats = [];
 var maxStats = 250;
 var porcentagemTelaPokemon=0.08;//0.08%
-var img= new Image();
+var imgPokemon= new Image();
 var nPokemon = 649;
 var sprites = ['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/'];
@@ -15,6 +15,8 @@ const tabelaEnum = {
 }
 var page = 1;
 
+
+var ahRetirar=["land","normal","plant","default","standard","altered"]
 var matrizAdjacencia = 
 [[0,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
 [1,0,1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,1,1],
@@ -52,6 +54,22 @@ mapaType.set("dragon",13);
 mapaType.set("ghost",14);
 mapaType.set("dark",15);
 mapaType.set("steel",16);
+
+//fundos repetidos:
+var sameType={"electric":"steel",
+"dark":"ghost",
+"flying":"normal",
+"poison":"bug",
+"grass":"normal",
+"psychic":"normal"};
+
+var isExtraordinary=()=>{
+    let request = new XMLHttpRequest()
+    request.open('GET', `https://pokeapi.co/api/v2/pokemon-species/${index}`, true)
+    request.onload = function () {
+        let species = JSON.parse(this.response);
+    }
+}
 
 var findAllPokemons = () => {
     let request = new XMLHttpRequest()
@@ -113,6 +131,10 @@ var alterarPokemon = (index) => {
             types.forEach((type) => {
                 document.getElementById("typeTela").innerHTML += ` <img id="types" src="images/spriteTypes/${type}.png"> `
             })
+            if(types.length==1){
+                types.push("psychic");
+            }
+            document.getElementById("backgroundDex").src=`images/fundos/${getType(types[0],types[1])}.jpg`
             //moves
             moves = [];
             data.moves.forEach(move => {
@@ -162,13 +184,13 @@ var getCry=(pokeName)=>{
 }
 
 var reajustarImagem = ()=>{
-    document.getElementById("sprite").style.width=`${Math.floor(img.naturalWidth*window.innerWidth*porcentagemTelaPokemon/100)}px`;
+    document.getElementById("sprite").style.width=`${Math.floor(imgPokemon.naturalWidth*window.innerWidth*porcentagemTelaPokemon/100)}px`;
 
-     if (img.naturalHeight>100){
+     if (imgPokemon.naturalHeight>100){
         document.getElementById("pokemonTela").style.marginTop = "14%"
      }else
 
-     if (img.naturalHeight>79){
+     if (imgPokemon.naturalHeight>79){
         
         document.getElementById("pokemonTela").style.marginTop = "15.5%"
         
@@ -183,17 +205,13 @@ var reajustarImagem = ()=>{
 window.onresize = reajustarImagem;
 
 var definirImagem = () => {
-    
-    img = new Image();
-    img.onload = function() {
+    imgPokemon = new Image();
+    imgPokemon.onload = function() {
         reajustarImagem();
     }
-    img.src = sprites[shiny + 0] + `${index}.gif`;
+    imgPokemon.src = sprites[shiny + 0] + `${index}.gif`;
     
     document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
-     
-     
-
 }
 
 var updateTable = () => {
@@ -373,7 +391,7 @@ var searchByName = () => {
 }
 
 var stringToShow=(texto)=>{
-    return texto.replace("-"," ");
+    return texto.replace(" ","").replace("-"," ").replace(ahRetirar,"");
 }
 
 var mute=()=>{
@@ -404,8 +422,16 @@ alterarPokemon(index);
 findAllPokemons();
 
 var getType=(primario,secundario)=>{
+    let valorRetornavel=primario;
     if(matrizAdjacencia[mapaType.get(primario)][mapaType.get(secundario)]<0){
-        return secundario;
+        
+        valorRetornavel=secundario;
     }
-    return primario;
+    console.log(sameType[valorRetornavel])
+    if(sameType[valorRetornavel]){
+        return sameType[valorRetornavel];
+    }
+    return valorRetornavel;
 }
+
+console.log(pokemons)
