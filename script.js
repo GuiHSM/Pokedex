@@ -4,8 +4,8 @@ var pokemons = [];
 var moves = [];
 var stats = [];
 var maxStats = 255;
-var porcentagemTelaPokemon=0.08;//0.08%
-var imgPokemon= new Image();
+var porcentagemTelaPokemon = 0.08;//0.08%
+var imgPokemon = new Image();
 var nPokemon = 649;
 var sprites = ['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/'];
@@ -15,60 +15,62 @@ const tabelaEnum = {
 }
 var page = 1;
 
-var ahRetirar=["land","normal","plant","default","standard","altered"]
-var matrizAdjacencia = 
-[[0,-1,-1,-1,-1,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
-[1,0,1,-1,1,1,1,1,1,1,1,-1,-1,-1,-1,1,1],
-[1,-1,0,-1,1,-1,-1,0,-1,1,-1,-1,-1,-1,-1,1,1],
-[1,1,1,0,1,-1,1,1,1,1,1,1,1,-1,1,1,1],
-[0,-1,-1,-1,0,-1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,-1],
-[1,-1,1,1,1,0,1,1,1,1,1,-1,1,-1,1,1,-1],
-[1,-1,1,-1,1,-1,0,-1,1,1,1,-1,-1,-1,-1,0,0],
-[1,-1,0,-1,1,-1,1,0,-1,1,-1,-1,-1,-1,1,1,0],
-[1,-1,1,-1,1,-1,-1,1,0,1,-1,-1,-1,-1,1,1,1],
-[-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1,-1],
-[1,-1,1,-1,1,-1,-1,1,1,1,0,-1,-1,-1,0,1,0],
-[1,1,1,-1,1,1,1,1,1,1,1,0,1,-1,1,1,1],
-[1,1,1,-1,1,-1,1,1,1,1,1,-1,0,-1,-1,1,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1],
-[1,1,1,-1,1,-1,1,-1,-1,1,0,-1,1,-1,0,0,1],
-[1,-1,-1,-1,1,-1,0,-1,-1,1,-1,-1,-1,-1,0,0,-1],
-[1,-1,-1,-1,1,1,0,0,-1,1,0,-1,-1,-1,-1,1,0]]
+var ahRetirar = ["land", "normal", "plant", "default", "standard", "altered"]
+var matrizAdjacencia =
+    [[0, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1],
+    [1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1],
+    [1, -1, 0, -1, 1, -1, -1, 0, -1, 1, -1, -1, -1, -1, -1, 1, 1],
+    [1, 1, 1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1],
+    [0, -1, -1, -1, 0, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1],
+    [1, -1, 1, 1, 1, 0, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, -1],
+    [1, -1, 1, -1, 1, -1, 0, -1, 1, 1, 1, -1, -1, -1, -1, 0, 0],
+    [1, -1, 0, -1, 1, -1, 1, 0, -1, 1, -1, -1, -1, -1, 1, 1, 0],
+    [1, -1, 1, -1, 1, -1, -1, 1, 0, 1, -1, -1, -1, -1, 1, 1, 1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1],
+    [1, -1, 1, -1, 1, -1, -1, 1, 1, 1, 0, -1, -1, -1, 0, 1, 0],
+    [1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, 0, 1, -1, 1, 1, 1],
+    [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, -1, 0, -1, -1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 1, 1, -1, 1, -1, 1, -1, -1, 1, 0, -1, 1, -1, 0, 0, 1],
+    [1, -1, -1, -1, 1, -1, 0, -1, -1, 1, -1, -1, -1, -1, 0, 0, -1],
+    [1, -1, -1, -1, 1, 1, 0, 0, -1, 1, 0, -1, -1, -1, -1, 1, 0]]
 
 var mapaType = new Map();
-mapaType.set("normal",0);
-mapaType.set("fire",1);
-mapaType.set("fighting",2);
-mapaType.set("water",3);
-mapaType.set("flying",4);
-mapaType.set("grass",5);
-mapaType.set("poison",6);
-mapaType.set("electric",7);
-mapaType.set("ground",8);
-mapaType.set("psychic",9);
-mapaType.set("rock",10);
-mapaType.set("ice",11);
-mapaType.set("bug",12);
-mapaType.set("dragon",13);
-mapaType.set("ghost",14);
-mapaType.set("dark",15);
-mapaType.set("steel",16);
+mapaType.set("normal", 0);
+mapaType.set("fire", 1);
+mapaType.set("fighting", 2);
+mapaType.set("water", 3);
+mapaType.set("flying", 4);
+mapaType.set("grass", 5);
+mapaType.set("poison", 6);
+mapaType.set("electric", 7);
+mapaType.set("ground", 8);
+mapaType.set("psychic", 9);
+mapaType.set("rock", 10);
+mapaType.set("ice", 11);
+mapaType.set("bug", 12);
+mapaType.set("dragon", 13);
+mapaType.set("ghost", 14);
+mapaType.set("dark", 15);
+mapaType.set("steel", 16);
 
 //fundos repetidos:
-var sameType={"electric":"steel",
-"dark":"ghost",
-"flying":"normal",
-"poison":"bug",
-"grass":"normal",
-"psychic":"normal"};
+var sameType = {
+    "electric": "steel",
+    "dark": "ghost",
+    "flying": "normal",
+    "poison": "bug",
+    "grass": "normal",
+    "psychic": "normal"
+};
 
-var isExtraordinary=()=>{
+var isExtraordinary = () => {
     let request = new XMLHttpRequest()
     var eh = false;
     request.open('GET', `https://pokeapi.co/api/v2/pokemon-species/${index}`, false)
     request.onload = function () {
         let species = JSON.parse(this.response);
-        eh = species.is_legendary||species.is_mythical;
+        eh = species.is_legendary || species.is_mythical;
     }
     request.send();
     return eh;
@@ -109,9 +111,9 @@ var alterarPokemon = (index) => {
         if (request.status >= 200 && request.status < 400) {
             console.log(isExtraordinary());
             definirImagem();
-            if(data.height>100){
-                document.getElementById("altura").innerText = `Altura: ${data.height/10} m`
-            }else{
+            if (data.height > 100) {
+                document.getElementById("altura").innerText = `Altura: ${data.height / 10} m`
+            } else {
                 document.getElementById("altura").innerText = `Altura: ${data.height * 10} cm`
             }
             document.getElementById("peso").innerText = `Peso: ${data.weight / 10} kg`
@@ -138,10 +140,10 @@ var alterarPokemon = (index) => {
             types.forEach((type) => {
                 document.getElementById("typeTela").innerHTML += ` <img id="types" src="images/spriteTypes/${type}.png"> `
             })
-            if(types.length==1){
+            if (types.length == 1) {
                 types.push("psychic");
             }
-            document.getElementById("backgroundDex").src=`images/fundos/${getType(types[0],types[1])}.jpg`
+            document.getElementById("backgroundDex").src = `images/fundos/${getType(types[0], types[1])}.jpg`
             //moves
             moves = [];
             data.moves.forEach(move => {
@@ -161,10 +163,12 @@ var alterarPokemon = (index) => {
                     moves.push({
                         nome: move.move.name,
                         nivel: nivel,
-                        metodo: metodo
+                        metodo: metodo,
+                        tipo: getMoveInformation(move.move.url)
                     })
                 }
             })
+
             //stats
             stats = []
             data.stats.forEach(stat => {
@@ -181,43 +185,69 @@ var alterarPokemon = (index) => {
     request.send()
 }
 
-var getCry=(pokeName)=>{
+var getMoveInformation = (url) => {
+
+    let request = new XMLHttpRequest()
+
+    request.open('GET', url, false)
+    let moveInfo = ""
+    request.onload = function () {
+
+        moveInfo = JSON.parse(this.response)
+        console.log(moveInfo.type.name)
+
+        if (moveInfo.type.name=="fairy") {
+            moveInfo.type.name="normal"
+            
+        }
+
+    }
+
+    request.send()
+    return moveInfo.type.name
+}
+
+var moveInformation = getMoveInformation(`https://pokeapi.co/api/v2/move/${index}`);
+
+console.log(getMoveInformation)
+
+var getCry = (pokeName) => {
     audioP.pause();
-    audioP.currentTime=0;
-    audioP = new Audio (`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ","")}.mp3`)
-    
-    audioP.volume = sound/2
+    audioP.currentTime = 0;
+    audioP = new Audio(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ", "")}.mp3`)
+
+    audioP.volume = sound / 2
     audioP.play();
 }
 
-var reajustarImagem = ()=>{
-    document.getElementById("sprite").style.width=`${Math.floor(imgPokemon.naturalWidth*window.innerWidth*porcentagemTelaPokemon/100)}px`;
+var reajustarImagem = () => {
+    document.getElementById("sprite").style.width = `${Math.floor(imgPokemon.naturalWidth * window.innerWidth * porcentagemTelaPokemon / 100)}px`;
 
-     if (imgPokemon.naturalHeight>100){
+    if (imgPokemon.naturalHeight > 100) {
         document.getElementById("pokemonTela").style.marginTop = "14%"
-     }else
+    } else
 
-     if (imgPokemon.naturalHeight>79){
-        
-        document.getElementById("pokemonTela").style.marginTop = "15.5%"
-        
-     }else{
+        if (imgPokemon.naturalHeight > 79) {
 
-        document.getElementById("pokemonTela").style.marginTop = "18%"
+            document.getElementById("pokemonTela").style.marginTop = "15.5%"
 
-     } 
+        } else {
+
+            document.getElementById("pokemonTela").style.marginTop = "18%"
+
+        }
 
 }
-  
+
 window.onresize = reajustarImagem;
 
 var definirImagem = () => {
     imgPokemon = new Image();
-    imgPokemon.onload = function() {
+    imgPokemon.onload = function () {
         reajustarImagem();
     }
     imgPokemon.src = sprites[shiny + 0] + `${index}.gif`;
-    
+
     document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
 }
 
@@ -230,6 +260,7 @@ var updateTable = () => {
         moves.forEach(movimento => {
             html += `<tr><td>${movimento.nome}</td>`
             html += movimento.nivel == 0 ? `<td>${formatMethod(movimento.metodo)}</td>` : ` <td>${movimento.nivel}</td>`;
+            html += `<td> <img src=images/spriteTypes/${movimento.tipo}.png> </td>`
             html += "</tr>"
         })
         document.getElementById("tabela").innerHTML = html;
@@ -279,11 +310,11 @@ var nextPokemon = () => {
     activeLight();
     playAudio(audioA);
     index++;
-    if (index >= nPokemon+1) {
+    if (index >= nPokemon + 1) {
         index = 1;
     }
     alterarPokemon(index);
-    getCry(pokemons[index-1].name);
+    getCry(pokemons[index - 1].name);
 }
 
 var previousPokmon = () => {
@@ -294,26 +325,26 @@ var previousPokmon = () => {
         index = nPokemon;
     }
     alterarPokemon(index);
-    getCry(pokemons[index-1].name);
+    getCry(pokemons[index - 1].name);
 }
 var activeLight = () => {
-    document.getElementById("blueLight").className="blueLightBrilho";
-    setTimeout((()=>{document.getElementById("blueLight").className=""}), 300);
+    document.getElementById("blueLight").className = "blueLightBrilho";
+    setTimeout((() => { document.getElementById("blueLight").className = "" }), 300);
 }
 
 var activeLightYellow = () => {
-    document.getElementById("rightYellowLight").className="rightYellowLightBrilho";
-    setTimeout((()=>{document.getElementById("rightYellowLight").className=""}), 300);
+    document.getElementById("rightYellowLight").className = "rightYellowLightBrilho";
+    setTimeout((() => { document.getElementById("rightYellowLight").className = "" }), 300);
 }
 
 var changeToShiny = () => {
     activeLight();
     playAudio(audioShiny);
     shiny = !shiny;
-    if(shiny){
-        document.getElementById("yellowLight").className="smallLight yellowLightBrilho";
-    }else{
-        document.getElementById("yellowLight").className="smallLight";
+    if (shiny) {
+        document.getElementById("yellowLight").className = "smallLight yellowLightBrilho";
+    } else {
+        document.getElementById("yellowLight").className = "smallLight";
     }
     definirImagem();
 }
@@ -325,9 +356,9 @@ var formatMethod = (method) => {
     return method.charAt(0).toUpperCase() + method.slice(1);
 }
 
-var playAudio=(audio)=>{
+var playAudio = (audio) => {
     audio.pause();
-    audio.currentTime=0;
+    audio.currentTime = 0;
     audio.play();
 }
 
@@ -358,7 +389,7 @@ var setPage = () => {
 
 var searchByName = () => {
     let text = document.getElementById("teste").value.toLowerCase();
-    
+
     let id = 0;
     let achado = 0;
     pokemons.forEach(pokemon => {
@@ -366,10 +397,10 @@ var searchByName = () => {
             if (pokemon.name === text) {
                 index = pokemon.id;
                 alterarPokemon(index);
-                achado = -nPokemon-1;
-                document.getElementById("greenLight").className="smallLight greenLightBrilho";
-                setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
-                getCry(pokemons[index-1].name);
+                achado = -nPokemon - 1;
+                document.getElementById("greenLight").className = "smallLight greenLightBrilho";
+                setTimeout((() => { document.getElementById("greenLight").className = "smallLight" }), 300);
+                getCry(pokemons[index - 1].name);
             }
             id = pokemon.id;
             achado++;
@@ -382,9 +413,9 @@ var searchByName = () => {
         index = id;
         alterarPokemon(id);
         document.getElementById("teste").value = "";
-        document.getElementById("greenLight").className="smallLight greenLightBrilho";
-        setTimeout((()=>{document.getElementById("greenLight").className="smallLight"}), 300);
-        getCry(pokemons[index-1].name);
+        document.getElementById("greenLight").className = "smallLight greenLightBrilho";
+        setTimeout((() => { document.getElementById("greenLight").className = "smallLight" }), 300);
+        getCry(pokemons[index - 1].name);
     }
     let lista = [], posicao = [];
     let mini = 50;
@@ -397,15 +428,15 @@ var searchByName = () => {
 
 }
 
-var stringToShow=(texto)=>{
-    return texto.replace(" ","").replace("-"," ").replace(ahRetirar,"");
+var stringToShow = (texto) => {
+    return texto.replace(" ", "").replace("-", " ").replace(ahRetirar, "");
 }
 
-var mute=()=>{
-    if(sound>0){
-        sound=0;
-    }else{
-        sound=0.3;
+var mute = () => {
+    if (sound > 0) {
+        sound = 0;
+    } else {
+        sound = 0.3;
     }
     audioA.volume = sound
     audioShiny.volume = sound
@@ -417,24 +448,24 @@ var pokemonDiferentes = [6, 17, 22, 40, 42, 49, 73, 142, 146]
 // sound effects 
 var sound = 0.3;
 
-const audioA = new Audio ("soundFX/pokemonButtonASound.mp3")
+const audioA = new Audio("soundFX/pokemonButtonASound.mp3")
 audioA.volume = sound
 
-const audioShiny = new Audio ("soundFX/pokemonShinySound.mp3")
+const audioShiny = new Audio("soundFX/pokemonShinySound.mp3")
 audioShiny.volume = sound
 
-var audioP = new Audio ("soundFX/pokemonShinySound.mp3");
+var audioP = new Audio("soundFX/pokemonShinySound.mp3");
 
 alterarPokemon(index);
 findAllPokemons();
 
-var getType=(primario,secundario)=>{
-    let valorRetornavel=primario;
-    if(matrizAdjacencia[mapaType.get(primario)][mapaType.get(secundario)]<0){
-        
-        valorRetornavel=secundario;
+var getType = (primario, secundario) => {
+    let valorRetornavel = primario;
+    if (matrizAdjacencia[mapaType.get(primario)][mapaType.get(secundario)] < 0) {
+
+        valorRetornavel = secundario;
     }
-    if(sameType[valorRetornavel]){
+    if (sameType[valorRetornavel]) {
         return sameType[valorRetornavel];
     }
     return valorRetornavel;
