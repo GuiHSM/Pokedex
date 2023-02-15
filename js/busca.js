@@ -1,6 +1,6 @@
 import { stringToShow } from "./utils/stringToShow.js";
 
-var pokemons = [];
+export let pokemons = [];
 var nPokemon=649
 
 /*var comparePokemons = (a,b)=>{
@@ -31,7 +31,7 @@ export let search=(text)=>{
             id = pokemon.id;
             achado++;
             if (pokemon.name === text) {
-                return {name:pokemons[id].name,id:id}
+                return id
             }
         }
     }
@@ -40,7 +40,7 @@ export let search=(text)=>{
     }
     if (achado == 1) {
         document.getElementById("teste").value = "";
-        return {name:pokemons[id-1].name,id:id}
+        return id
     }
     let lista = [], posicao = [];
     let mini = 50;

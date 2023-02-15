@@ -10,7 +10,6 @@ var index = 1;
 var pokemons = [];
 var moves = [];
 var stats = [];
-var name = "";
 var nPokemon=649
 
 const tabelaEnum = {
@@ -95,7 +94,7 @@ var nextPokemon = () => {
         index = 1;
     }
     alterarPokemon(index);
-    getCry(name);
+    getCry(index);
 }
 
 var previousPokemon = () => {
@@ -106,7 +105,7 @@ var previousPokemon = () => {
         index = nPokemon;
     }
     alterarPokemon(index);
-    getCry(name);
+    getCry(index);
 }
 
 var changeToShiny = () => {
@@ -131,11 +130,10 @@ var previousPage = () => {
 
 var searchByName = () => {
     let text = document.getElementById("teste").value.toLowerCase();
-    let pokemon;
-    pokemon = search(text);
-    if(pokemon){
-        index = pokemon.id;
-        getCry(pokemon.name);
+    let id = search(text);
+    if(id){
+        index = id;
+        getCry(index);
         alterarPokemon(index);
         activeGreenLight();
     }

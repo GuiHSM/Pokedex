@@ -1,3 +1,5 @@
+import { pokemons } from "./busca.js";
+
 let sound =0.3;
 let audioP = new Audio("soundFX/pokemonShinySound.mp3");
 const audioButton = new Audio("soundFX/pokemonButtonASound.mp3")
@@ -24,11 +26,12 @@ export let playAudioButton = ()=>{
     playAudio(audioButton);
 }
 
-export let getCry = (pokeName) => {
-    if(pokeName){
+export let getCry = (index) => {
+    console.log(index,pokemons[index-1])
+    if(index>0){
         audioP.pause();
         audioP.currentTime = 0;
-        audioP = new Audio(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ", "")}.mp3`)
+        audioP = new Audio(`https://play.pokemonshowdown.com/audio/cries/${pokemons[index-1].name.replace(" ", "")}.mp3`)
 
         audioP.volume = sound / 2
         audioP.play();

@@ -1,5 +1,8 @@
-var ahRetirar = ["Ordinary","land", "normal", "plant", "default", "standard", "altered"]
+var ahRetirar = ["-ordinary","-land", "-normal", "-plant", "-default", "-standard", "-altered","-incarnate", "-red-striped", "-aria"]
 
 export let stringToShow = (texto) => {
-    return texto.replace(" ", "").replace("-", " ").replace(ahRetirar, "");
+    ahRetirar.forEach((valor)=>{
+        texto = texto.replace(valor,"");
+    })
+    return texto.replace("-", " ").replace(" ", "");
 }
