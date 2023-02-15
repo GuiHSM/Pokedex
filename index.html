@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
     <title>Pokedex</title>
 </head>
 
@@ -29,17 +29,17 @@
 
         <table id="tabela"></table>
 
-        <input id="teste" oninput="searchByName()" placeholder="SEARCH POKEMON">
+        <input id="teste" placeholder="SEARCH POKEMON">
         <div id="pokemonName">
             <p id="name"></p>
         </div>
 
-        <button type="button" id="rightButton" onclick="nextPokemon()">.</button>
-        <button type="button" id="leftButton" onclick="previousPokmon()">.</button>
-        <button type="button" id="shinyButton" onclick="changeToShiny()">.</button>
-        <button type="button" id="muteButton" onclick="mute()">BOTAO</button>
-        <button type="button" id="leftWhiteButton" onclick="setPage()">BOTAO</button>
-        <button type="button" id="rightWhiteButton" onclick="setPage()">BOTAO</button>
+        <button type="button" id="rightButton">.</button>
+        <button type="button" id="leftButton">.</button>
+        <button type="button" id="shinyButton">.</button>
+        <button type="button" id="muteButton">BOTAO</button>
+        <button type="button" id="leftWhiteButton">BOTAO</button>
+        <button type="button" id="rightWhiteButton">BOTAO</button>
         <button type="button" id="upButton" onclick="">.</button>
 
     </div>
