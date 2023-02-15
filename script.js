@@ -156,6 +156,6 @@ document.getElementById("muteButton").onclick=mute;
 document.getElementById("leftWhiteButton").onclick=nextPage;
 document.getElementById("rightWhiteButton").onclick=previousPage;
 document.getElementById("teste").oninput=searchByName
-console.log(document.getElementById("rightWhiteButton").onclick)
+//document.getElementById("rightWhiteButton").onclick
 
 //document.getElementById("upButton");

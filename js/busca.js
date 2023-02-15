@@ -31,7 +31,6 @@ export let search=(text)=>{
             id = pokemon.id;
             achado++;
             if (pokemon.name === text) {
-                console.log(pokemons[id].name)
                 return {name:pokemons[id].name,id:id}
             }
         }

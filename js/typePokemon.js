@@ -97,10 +97,9 @@ export let utilizeTypes=(dataTypes)=>{
         types.push(type.type.name);
     })
     types=retireFairy(types);
-    console.log(types)
+    (types)
     document.getElementById("typeTela").innerHTML = "";
     types.forEach((type) => {
-        console.log(type)
         document.getElementById("typeTela").innerHTML += ` <img id="types" src="images/spriteTypes/${type}.png"> `
     })
     if (types.length == 1) {

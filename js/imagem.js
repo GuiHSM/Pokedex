@@ -1,8 +1,9 @@
 var porcentagemTelaPokemon = 0.08;//0.08%
 
 var shiny = false;
-
-
+var imgPokemon;
+var naturalHeight=0;
+var naturalWidth=0;
 var sprites = ['https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/'];
 
@@ -11,16 +12,17 @@ export let setShiny=()=>{
 }
 
 export let definirImagem = (index) => {
-    let imgPokemon = new Image();
-    imgPokemon.onload = function () {
+    imgPokemon = new Image();
+    imgPokemon.src = sprites[shiny + 0] + `${index}.gif`;
+    imgPokemon.onload=()=>{
+        naturalHeight = imgPokemon.naturalHeight
+        naturalWidth = imgPokemon.naturalWidth
         reajustarImagem();
     }
-    imgPokemon.src = sprites[shiny + 0] + `${index}.gif`;
-
-    document.getElementById("sprite").src = sprites[shiny + 0] + `${index}.gif`;
+    document.getElementById("sprite").src = imgPokemon.src;
 }
 
-export let reajustarImagem = (naturalWidth, naturalHeight) => {
+export let reajustarImagem = () => {
     document.getElementById("sprite").style.width = `${Math.floor(naturalWidth * window.innerWidth * porcentagemTelaPokemon / 100)}px`;
     if (naturalHeight > 100) {
         document.getElementById("pokemonTela").style.marginTop = "14%"

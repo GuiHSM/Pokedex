@@ -1,13 +1,10 @@
 let sound =0.3;
-console.log("asd")
 let audioP = new Audio("soundFX/pokemonShinySound.mp3");
 const audioButton = new Audio("soundFX/pokemonButtonASound.mp3")
 audioButton.volume = sound
-console.log("asd")
 
 const audioShiny = new Audio("soundFX/pokemonShinySound.mp3")
 audioShiny.volume = sound
-console.log("asd")
 
 export let muteDesmute=()=>{
     if (sound > 0) {
@@ -29,7 +26,6 @@ export let playAudioButton = ()=>{
 
 export let getCry = (pokeName) => {
     if(pokeName){
-        console.log("asd:",pokeName)
         audioP.pause();
         audioP.currentTime = 0;
         audioP = new Audio(`https://play.pokemonshowdown.com/audio/cries/${pokeName.replace(" ", "")}.mp3`)
