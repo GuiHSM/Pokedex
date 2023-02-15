@@ -20,6 +20,7 @@ var getMoveInformation = (url) => {
     if (info.tipo=="fairy") {
         info.tipo="normal"
     }
+
     if(id>900){
         id-=9100
     }

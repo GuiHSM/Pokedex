@@ -57,16 +57,31 @@ var getColor = (statColor) => {
     return `rgb(${r},${g},${b});`
 }
 
+
 let setMoves = (moves) =>{
     moves = moves.sort((mov1, mov2) => {
         return methodPriority(mov1) - methodPriority(mov2);
     })
     let html = "";
     moves.forEach(movimento => {
+
+        if(allMoves[movimento.id].poder==null){
+            allMoves[movimento.id].poder="-"
+        }
+
+        if(allMoves[movimento.id].acuracia==null){
+            allMoves[movimento.id].acuracia="-"
+        }
+
         html += `<tr><td>${movimento.nome}</td>`
-        html += movimento.nivel == 0 ? `<td>${formatMethod(movimento.metodo)}</td>` : ` <td>${movimento.nivel}</td>`;
-        html += `<td> <img src=images/spriteTypes/${allMoves[movimento.id].tipo}.png> </td>`
+        html += `<td> <img class="tabelaImages" src=images/spriteTypes/${allMoves[movimento.id].tipo}.png> </td>`
+        html += `<td> <img class="tabelaImages" src=images/spriteTypes/${allMoves[movimento.id].tipoDano}.png> </td>`
+        html += `<td class="tabelaInfo"> <em class="tabelaEm">Power</em><br>${allMoves[movimento.id].poder} </td>`
+        html += `<td class="tabelaInfo"> <em class="tabelaEm">Accuracy</em><br>${allMoves[movimento.id].acuracia}</td>`
+        html += `<td class="tabelaInfo"> <em class="tabelaEm">PP</em><br>${allMoves[movimento.id].pp} </td>`
+        html += movimento.nivel == 0 ? `<td class="tabelaMedoto">${formatMethod(movimento.metodo)}</td>` : ` <td class="tabelaMedoto">lvl:${movimento.nivel}</td>`;
         html += "</tr>"
+
     })
     document.getElementById("tabela").innerHTML = html;
 }
