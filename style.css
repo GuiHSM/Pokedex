@@ -245,7 +245,7 @@ progress {}
     margin-top: 0.9%;
 }
 
-#redLight:hover {
+.redLightBrilho {
     background-color: #fff;
     opacity: 45%;
     box-shadow:

@@ -1,5 +1,5 @@
 import { getCry, muteDesmute, playAudioButton, playAudioShiny } from "./js/audio.js";
-import { activeBlueLight, activeGreenLight, activeYellowLight, setYellowLight } from "./js/light.js";
+import { activeBlueLight, activeGreenLight, activeYellowLight, setYellowLight ,setRedLight } from "./js/light.js";
 import { definirImagem, reajustarImagem, setShiny } from "./js/imagem.js";
 import { findAllPokemons, search } from "./js/busca.js";
 import { utilizeTypes } from "./js/typePokemon.js";
@@ -141,7 +141,9 @@ var searchByName = () => {
 }
 
 var mute = () => {
-    muteDesmute()
+    setRedLight();   
+    muteDesmute();
+    
 }
 
 alterarPokemon(index);

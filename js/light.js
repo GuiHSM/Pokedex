@@ -1,4 +1,5 @@
 let yellow = false;
+let red = false;
 
 export let activeBlueLight = () => {
     document.getElementById("blueLight").className = "blueLightBrilho";
@@ -15,6 +16,15 @@ export let setYellowLight=()=>{
         document.getElementById("yellowLight").className = "smallLight yellowLightBrilho";
     } else {
         document.getElementById("yellowLight").className = "smallLight";
+    }
+}
+
+export let setRedLight=()=>{
+    red = !red;
+    if (red) {
+        document.getElementById("redLight").className = "smallLight redLightBrilho";
+    } else {
+        document.getElementById("redLight").className = "smallLight";
     }
 }
 
