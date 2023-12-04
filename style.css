@@ -2,6 +2,11 @@
 
 
 
+body {
+
+    background-color: #373736;
+}
+
 #pokedex {
     margin-top: 5%;
 }
