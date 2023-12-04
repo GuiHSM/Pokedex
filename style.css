@@ -114,8 +114,10 @@
     font-size: 0.78vw;
     background-color: transparent;
     border: none;
+}
 
-
+::placeholder {
+    color: aliceblue ;
 }
 
 #pokemonName {
